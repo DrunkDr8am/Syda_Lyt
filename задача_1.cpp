@@ -35,12 +35,6 @@ int chisla(int a[10])
     return 0;
 }
 
-
-
-
-
-
-
 int main()
 {
     int i=0;
