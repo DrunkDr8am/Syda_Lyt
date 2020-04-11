@@ -1,4 +1,4 @@
-﻿#include <string.h>
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
@@ -41,15 +41,16 @@ int main() {
         {
             printf("\nvvedennaya stroka: \"%s\"\n", s);
 
-            Nepovt = (char*)calloc((strlen(s) + 2), sizeof(char));
-            Povtor = (char*)calloc((strlen(s) + 3), sizeof(char));
+            Nepovt = (char*)calloc((strlen(s) + 5), sizeof(char));
+            Povtor = (char*)calloc((strlen(s) + 5), sizeof(char));
 
-            form2(s, Nepovt);
-            printf("\nstroka bez povtoryayshihsya bukv: \"%s\" \n", Nepovt);
+            form2(s, Nepovt);           
+            printf("\nstroka bez povtoryayshihsya bukv: \"%s\" \n", ++Nepovt);
+            Nepovt--;
 
             form1(s, Povtor);
-            printf("\nstroka is povtoryayshihsya bykv: \"%s\" \n", Povtor);
-
+            printf("\nstroka is povtoryayshihsya bykv: \"%s\" \n", ++Povtor);
+            Povtor--;
 
 
             free(Povtor);
@@ -86,15 +87,17 @@ char* copyPovtor(char** from, char* to) //повторяющиеся буквы
         *(*from)++;
         if ((a == b) || (a == b + 32) || (a == b - 32))
         {
+            
+            if (n == 0)
+             {
+              strncat_s(to, 2 + strlen(to), " ", 1);
+             }
             strncat_s(to, 2 + strlen(to), *from, 1);
             n++;
         }
         *(*from)++;
     }
-    if (n > 0)
-    {
-        strncat_s(to, 2 + strlen(to), " ", 1);
-    }
+    
 
     return to;
 }
@@ -108,13 +111,16 @@ char* copyNepovt(char** from, char* to) {
         *(*from)--;
         b = **from;
         *(*from)++;
+        
         if ((a != b) && (a != b + 32) && (a != b - 32))
         {
+            if (n==0)
+            strncat_s(to, 2 + strlen(to), " ", 1);
             strncat_s(to, 2 + strlen(to), *from, 1);
+            n++;
         }
         *(*from)++;
     }
-    strncat_s(to, 2 + strlen(to), " ", 1);
     return to;
 }
 //Пропуск пробелов
